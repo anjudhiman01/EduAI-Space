@@ -1,0 +1,335 @@
+/* Importing Google Font for a modern look */
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
+:root {
+  --bg-dark: #0a0612;
+  --card-bg: rgba(22, 14, 38, 0.8);
+  --neon-purple: #8b5cf6;
+  --neon-cyan: #06b6d4;
+  --neon-pink: #ec4899;
+  --text-main: #f3f4f6;
+}
+
+body {
+  background: radial-gradient(circle at top, #1e1145 0%, var(--bg-dark) 100%);
+  font-family: "Space Grotesk", sans-serif;
+  color: var(--text-main);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 10px;
+}
+
+/* Mobile Container Frame Layout */
+.app-container {
+  width: 100%;
+  max-width: 410px;
+  height: 85vh;
+  min-height: 600px; /* Reduced min-height slightly for better screen adjustments (Suggestion CSS-4) */
+  background: var(--card-bg);
+  border-radius: 32px;
+  padding: 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(139, 92, 246, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+}
+
+/* Glowing Header Text */
+.app-header h2 {
+  font-weight: 700;
+  background: linear-gradient(to right, var(--neon-cyan), var(--neon-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* App Modules Navigation Tabs styling */
+.nav-pills .nav-link {
+  color: #9ca3af;
+  font-weight: 500;
+  border-radius: 12px;
+  transition: all 0.3s ease; /* Smooth hover transition (Suggestion CSS-1) */
+  font-size: 0.9rem;
+  padding: 10px;
+}
+.nav-pills .nav-link.active {
+  background: linear-gradient(135deg, var(--neon-purple), #6d28d9);
+  color: white;
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+}
+
+.tab-content,
+.tab-pane {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* 1. Smooth Tab Transition Animation (Suggestion CSS-5) */
+.tab-pane {
+  animation: fadeInPane 0.4s ease-in-out;
+}
+@keyframes fadeInPane {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.backend-box {
+  background: rgba(255, 255, 255, 0.02) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  border-radius: 20px !important;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.section-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #9ca3af;
+}
+
+/* Chat Screen inner layout */
+.chat-box {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+/* Premium Scrollbar */
+.chat-box::-webkit-scrollbar {
+  width: 4px;
+}
+.chat-box::-webkit-scrollbar-thumb {
+  background: var(--neon-purple);
+  border-radius: 10px;
+}
+
+.bot-message,
+.user-message {
+  max-width: 85%;
+  padding: 12px 16px;
+  border-radius: 16px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+.bot-message {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-main);
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+}
+.user-message {
+  background: linear-gradient(135deg, var(--neon-cyan), #0891b2);
+  color: white;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+
+/* Custom Input Fields */
+.form-control,
+textarea {
+  background: rgba(0, 0, 0, 0.3) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+  border-radius: 12px !important;
+  padding: 12px !important;
+}
+.form-control:focus,
+textarea:focus {
+  border-color: var(--neon-purple) !important;
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.2) !important;
+}
+
+/* 2. Custom Input Placeholder Light Color fix (Suggestion CSS-2) */
+::placeholder {
+  color: #9ca3af !important;
+  opacity: 0.7;
+}
+
+/* 3. Remove Ugly Browser Focus Outlines (Suggestion CSS-3) */
+button:focus,
+input:focus,
+textarea:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Buttons custom styling with basic active effect */
+.btn {
+  transition: all 0.3s ease !important;
+}
+.btn:active {
+  transform: scale(0.98) !important;
+}
+
+.btn-primary {
+  background: var(--neon-purple);
+  border: none;
+  border-radius: 12px;
+  padding: 12px 20px;
+}
+.btn-info {
+  background: var(--neon-cyan);
+  border: none;
+  border-radius: 12px;
+  padding: 12px;
+  font-weight: 600;
+}
+.btn-danger {
+  background: var(--neon-pink);
+  border: none;
+  border-radius: 12px;
+  padding: 12px;
+  font-weight: 600;
+}
+.btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Output block for AI response text styling */
+.output-box {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 14px;
+  border-left: 4px solid var(--neon-cyan);
+  font-size: 0.9rem;
+  max-height: 250px;
+  overflow-y: auto;
+  white-space: pre-line;
+  color: #f3f4f6 !important;
+}
+#quizOutput {
+  border-left-color: var(--neon-pink);
+}
+
+/* Beautiful Typing Animation Placeholder */
+.typing-loader {
+  display: inline-flex;
+  gap: 4px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  align-self: flex-start;
+}
+.typing-loader span {
+  width: 6px;
+  height: 6px;
+  background: var(--text-main);
+  border-radius: 50%;
+  animation: bounce 1.4s infinite ease-in-out both;
+}
+.typing-loader span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+.typing-loader span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+/* ==========================================
+   ADDED: CHAT HISTORY SIDEBAR DRAWER LAYOUT
+   ========================================== */
+   .chat-sidebar {
+    position: absolute;
+    top: 0;
+    left: -261px;
+    width: 260px;
+    height: 100%;
+    background: #110a21; /* Solid dark purple-black background */
+    z-index: 100;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    transition: left 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+  }
+  .chat-sidebar.active {
+    left: 0;
+  }
+  .sidebar-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .btn-close-sidebar {
+    background: none;
+    border: none;
+    color: #ff4a4a; /* High contrast red close button */
+    font-size: 1.3rem;
+    transition: transform 0.2s;
+  }
+  .btn-close-sidebar:hover {
+    transform: scale(1.1);
+  }
+  .sidebar-history-list {
+    flex: 1;
+    overflow-y: auto;
+  }
+  
+  /* 💡 SECTION HEADINGS FIX: High visibility text colors for labels */
+  .chat-sidebar .text-muted {
+    color: #a78bfa !important; /* Premium bright light-purple for category headings */
+    font-weight: 700 !important;
+    letter-spacing: 0.5px;
+  }
+  
+  /* 💡 PLACEHOLDER TEXT FIX: "No chats.", "No summaries." label contrast adjustment */
+  .chat-sidebar p.text-muted {
+    color: #9ca3af !important; /* Crisp light gray for empty state logs */
+    font-size: 0.85rem;
+  }
+  
+  /* Dynamic history row links */
+  .history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    background: rgba(255, 255, 255, 0.05); /* Slightly brighter background card tint */
+    border-radius: 8px;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    color: #f3f4f6; /* Crystal clean text node color */
+    transition: all 0.2s ease-in-out;
+  }
+  .history-item:hover {
+    background: rgba(139, 92, 246, 0.25);
+    color: #ffffff;
+  }
+  .btn-delete-history {
+    background: none;
+    border: none;
+    color: #f87171; /* Visible light coral-red for delete icon */
+    opacity: 0.8;
+    font-size: 0.85rem;
+    transition: opacity 0.2s;
+  }
+  .btn-delete-history:hover {
+    opacity: 1;
+  }
+  .text-purple {
+    color: #c084fc; /* Bright violet accent icon color */
+  }

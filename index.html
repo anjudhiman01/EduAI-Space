@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>EduAI Space - AI Study Assistant App</title>
+    
+    <meta name="theme-color" content="#0d6efd">
+
+    <meta property="og:title" content="EduAI Space - AI Study Assistant">
+    <meta property="og:description" content="An AI-powered smart learning assistant for students, featuring smart chat, notes summarizer, and quick quiz generator.">
+    <meta property="og:type" content="website">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+
+<main class="app-container">
+    
+    <header class="app-header text-center mb-4">
+        <h2><i class="fa-solid fa-graduation-cap"></i> EduAI Space</h2>
+        <p class="text-white-50 small mb-0">Your Personal Smart Learning Assistant</p>
+    </header>
+
+    <ul class="nav nav-pills nav-justified mb-4" id="moduleTabs" role="tablist">
+        <li class="nav-item">
+            <button class="nav-link active" id="chat-tab" data-bs-toggle="tab" data-bs-target="#chat-module" type="button">
+                <i class="fa-solid fa-comments"></i> Chat
+            </button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" id="summary-tab" data-bs-toggle="tab" data-bs-target="#summary-module" type="button">
+                <i class="fa-solid fa-file-lines"></i> Summary
+            </button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" id="quiz-tab" data-bs-toggle="tab" data-bs-target="#quiz-module" type="button">
+                <i class="fa-solid fa-lightbulb"></i> Quiz
+            </button>
+        </li>
+    </ul>
+
+    <div class="chat-sidebar" id="chatSidebar">
+        <div class="sidebar-header d-flex justify-content-between align-items-center p-3">
+            <h5 class="mb-0 text-white"><i class="fa-solid fa-folder-open text-purple"></i> Dashboard History</h5>
+            <button type="button" class="btn-close-sidebar" id="btnCloseSidebar">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        
+        <div class="sidebar-history-list p-2">
+            <div class="fw-bold text-muted small px-2 mt-2 mb-1"><i class="fa-solid fa-comments"></i> SAVED CHATS</div>
+            <div id="historyList"></div>
+
+            <div class="fw-bold text-muted small px-2 mt-3 mb-1"><i class="fa-solid fa-file-lines text-info"></i> SAVED SUMMARIES</div>
+            <div id="summaryHistoryList"></div>
+
+            <div class="fw-bold text-muted small px-2 mt-3 mb-1"><i class="fa-solid fa-lightbulb text-danger"></i> SAVED QUIZZES</div>
+            <div id="quizHistoryList"></div>
+        </div>
+    </div>
+
+    <div class="tab-content">
+        
+        <section class="tab-pane fade show active" id="chat-module">
+            <div class="card p-0 backend-box position-relative overflow-hidden">
+                <div class="chat-header-actions d-flex justify-content-between align-items-center p-2 border-bottom border-secondary-subtle">
+                    <button type="button" class="btn-sidebar-toggle" onclick="openSidebar()">
+                        <i class="fa-solid fa-bars"></i> History
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-light" id="btnNewChat">
+                        <i class="fa-solid fa-plus"></i> New Chat
+                    </button>
+                </div>
+
+                <div class="p-3 d-flex flex-column flex-grow-1 overflow-hidden" style="height: calc(100% - 45px);">
+                    <div class="chat-box mb-3" id="chatWindow">
+                        <div class="bot-message mb-2">👋 Hi! I am your AI Guide. Ask me any doubts from your syllabus!</div>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="chatInput" class="form-control" placeholder="Type a question...">
+                        <button type="button" class="btn btn-primary" id="btnSendChat">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="tab-pane fade" id="summary-module">
+            <div class="card p-0 backend-box position-relative overflow-hidden">
+                <div class="chat-header-actions d-flex justify-content-between align-items-center p-2 border-bottom border-secondary-subtle">
+                    <button type="button" class="btn-sidebar-toggle" onclick="openSidebar()">
+                        <i class="fa-solid fa-bars"></i> History
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-light" id="btnNewSummary">
+                        <i class="fa-solid fa-plus"></i> New Summary
+                    </button>
+                </div>
+
+                <div class="p-3 flex-grow-1 overflow-hidden" style="height: calc(100% - 45px); overflow-y: auto;">
+                    <h6 class="section-title"><i class="fa-solid fa-compress text-info"></i> Paste Long Notes</h6>
+                    <textarea id="summaryInput" class="form-control mb-3" rows="5" placeholder="Paste paragraphs or book chapters here..."></textarea>
+                    <button type="button" class="btn btn-info text-white w-100 mb-3" id="btnSummarize">Summarize Data</button>
+                    <div class="output-box p-3 d-none" id="summaryOutput"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="tab-pane fade" id="quiz-module">
+            <div class="card p-0 backend-box position-relative overflow-hidden">
+                <div class="chat-header-actions d-flex justify-content-between align-items-center p-2 border-bottom border-secondary-subtle">
+                    <button type="button" class="btn-sidebar-toggle" onclick="openSidebar()">
+                        <i class="fa-solid fa-bars"></i> History
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-light" id="btnNewQuiz">
+                        <i class="fa-solid fa-plus"></i> New Quiz
+                    </button>
+                </div>
+
+                <div class="p-3 flex-grow-1 overflow-hidden" style="height: calc(100% - 45px); overflow-y: auto;">
+                    <h6 class="section-title"><i class="fa-solid fa-dice text-danger"></i> Topic for Quiz</h6>
+                    <input type="text" id="quizTopic" class="form-control mb-3" placeholder="e.g., Database Management, Java Basics">
+                    <button type="button" class="btn btn-danger w-100 mb-3" id="btnGenerateQuiz">Generate 3 MCQs</button>
+                    <div class="output-box p-3 d-none" id="quizOutput"></div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
